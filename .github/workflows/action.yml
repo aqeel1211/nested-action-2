@@ -1,0 +1,29 @@
+name: bm service testing
+
+inputs:
+  GIT_BRANCH:
+    description: 'branch name'
+    required: true
+  ENV_TYPE:
+    description: 'environment name'
+    required: true
+  TAGS:
+    description: 'Environment'
+    required: true
+  RETRY_FAILED_TESTS:
+    description: 'Retry Failed Tests'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: 'aqeel1211/nested-actions-2'
+        ref: main
+    - name: Set allure variables
+      run: |
+        echo ${{ inputs.ENV_TYPE }}
+        echo ${{ inputs.GIT_BRANCH }}
+        echo ${{ inputs.TAGS }}
+      shell: bash
